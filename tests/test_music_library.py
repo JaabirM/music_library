@@ -16,12 +16,10 @@ class TestMusicLibrary(unittest.TestCase):
         self.library.add(self.track2)
         self.assertEqual(self.library.all(), [self.track1, self.track2])
     
-    def can_list_songs(self):
+    def test_can_list_songs(self):
         self.library.add(self.track1)
-        self.assertEqual(self.library.all(), [self.track1])
+        self.assertEqual(self.library.all(), [self.track1, self.track2, self.track1])
 
-    def can_remove_song(self):
-        self.library.add(self.track1)
-        self.library.add(self.track2)
-        self.assertEqual(self.library.remove(0), [])
-        self.assertEqual(self.library.all, [self.track2])
+    def test_can_remove_song(self):
+        self.library.remove(1)
+        self.assertEqual(self.library.all(), [self.track1, self.track1])
