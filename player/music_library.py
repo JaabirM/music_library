@@ -16,10 +16,6 @@ class MusicLibrary:
     
     def search(self, term, type):
         filtered = []
-        self.add(Track("Dead Letters", "P.S. Eliot", "dl.mp3"))
-        self.add(Track("Friend two", "??", "xD.mp3"))
-        self.add(Track("Friend Is A Four Letter Word", "CAKE", "friend.mp3"))
-        self.add(Track("Letters '98", "Havergal", "98.mp3"))
         if type == "title":
             filtered = filter(lambda track: str(term) in track.title.lower(), self.song_list)
         elif type == "artist":
@@ -31,7 +27,8 @@ class MusicLibrary:
                 result = vars(i)
                 for (k, v) in result.items():
                     if str(term) in v.lower():
-                        filtered.append(i)
+                        if i not in filtered:
+                            filtered.append(i)
         return list(filtered)
 
 from dataclasses import dataclass
