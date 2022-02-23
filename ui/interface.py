@@ -63,16 +63,16 @@ class Interface:
         choice = self.console.input("What do you want to search by? ")
         search = self.console.input("What do you want to search for? ").lower()
         if choice == "t":
-            found = self.music_library.search(search, "title")
+            found = self.music_library.search(lambda track: search in track.title.lower())
             self._list_tracks(found)
         elif choice == "a":
-            found = self.music_library.search(search, "artist")  # TODO: Find tracks by artist
+            found = self.music_library.search(lambda track: search in track.artist.lower())
             self._list_tracks(found)
         elif choice == "f":
-            found = self.music_library.search(search, "file")  # TODO: Find tracks by file
+            found = self.music_library.search(lambda track: search in track.file.lower())
             self._list_tracks(found)
         elif choice == "*":
-            found = self.music_library.search(search, "*")  # TODO: Find tracks by any field
+            found = self.music_library.search(search)
             self._list_tracks(found)
         else:
             self.console.print("No such field!")

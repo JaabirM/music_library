@@ -14,22 +14,18 @@ class MusicLibrary:
         except IndexError:
             return None
     
-    def search(self, term, type):
-        filtered = []
-        if type == "title":
-            filtered = filter(lambda track: str(term) in track.title.lower(), self.song_list)
-        elif type == "artist":
-            filtered = filter(lambda track: str(term) in track.artist.lower(), self.song_list)
-        elif type == "file":
-            filtered = filter(lambda track: str(term) in track.file.lower(), self.song_list)
-        else:
+    def search(self, condition):
+        if isinstance(condition, str):
+            filtered = []
             for i in self.song_list:
                 result = vars(i)
                 for (k, v) in result.items():
-                    if str(term) in v.lower():
-                        if i not in filtered:
-                            filtered.append(i)
-        return list(filtered)
+                   if str(condition) in v.lower():
+                     if i not in filtered:
+                        filtered.append(i)
+            return list(filtered)          
+        else:
+            return list(filter(condition, self.song_list))
 
 from dataclasses import dataclass
 
